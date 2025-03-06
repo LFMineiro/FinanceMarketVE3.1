@@ -8,6 +8,7 @@ typedef struct _investor {
     char profile[35];
 } Investor;
 
+
 Investor *createInvestor(int id, const char *name, const char *profile ) {
     Investor *investor = (Investor *) calloc(1, sizeof(Investor));
 
@@ -19,7 +20,11 @@ Investor *createInvestor(int id, const char *name, const char *profile ) {
 }
 
 void printInvestor(const Investor *investor) {
-    printf("%s\n", investor->name);
+    printf("nome: %s\ncodigo: %d\nperfil: %s\n\n", investor->name, investor->id, investor->profile);
+}
+
+void *deleteInvestor(Investor *investor) {
+    
 }
 
 
