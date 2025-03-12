@@ -8,6 +8,21 @@ typedef struct _investor {
     char profile[35];
 } Investor;
 
+int showMenu() {
+
+    int opcao;
+
+    printf("Acoes:\n");
+    printf("1 - Cadastrar um novo investidor\n");
+    printf("2 - Remover um investidor\n");
+    printf("3 - Cadastrar uma nova transacao\n");
+    printf("4 - Remover uma transacao\n\n");
+    printf("Digite a opcao: ");
+    scanf("%d", &opcao);
+
+    return opcao;
+
+}
 
 Investor *createInvestor(int id, const char *name, const char *profile ) {
     Investor *investor = (Investor *) calloc(1, sizeof(Investor));
@@ -23,18 +38,15 @@ void printInvestor(const Investor *investor) {
     printf("nome: %s\ncodigo: %d\nperfil: %s\n\n", investor->name, investor->id, investor->profile);
 }
 
-void *deleteInvestor(Investor *investor) {
+// void deleteInvestor(Investor *investor) {
     
-}
+// }
 
 
 int main() {
     
     Investor *investidor1 = createInvestor(12, "Luiz", "Conservador");
-
     printInvestor(investidor1);
-
-
 
     return 0;
 }
