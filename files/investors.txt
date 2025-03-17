@@ -1,3 +1,2 @@
-1;santana;conservador;
 2;mineiro;conservador;
 3;kaua;arriscador;
