@@ -1,2 +1,4 @@
 2;mineiro;conservador;
 3;kaua;arriscador;
+8;parr;moderado;
+10;rebeca;moderado;
