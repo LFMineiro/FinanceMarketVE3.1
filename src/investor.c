@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../headers/investor.h"
 
-typedef struct _investor {
-    int id;
-    char name[50];
-    char profile[35];
-} Investor;
+// typedef struct _investor {
+//     int id;
+//     char name[50];
+//     char profile[35];
+// } Investor;
 
 Investor** investorsList = NULL;
 int numInvestors = 0;
@@ -52,7 +53,7 @@ void deleteInvestor(int id){
 }
 
 void loadInvestors(){
-    FILE *investorsFile = fopen("../files/investors.txt", "r");
+    FILE *investorsFile = fopen("files/investors.txt", "r");
     if(!investorsFile){
         printf("Erro ao ler arquivo");
         exit(1);
@@ -72,7 +73,7 @@ void loadInvestors(){
 }
 
 void saveInvestors(){
-    FILE *investorsFile = fopen("../files/investors.txt", "w");
+    FILE *investorsFile = fopen("files/investors.txt", "w");
     if(!investorsFile){
         printf("Erro ao ler arquivo");
         exit(1);
@@ -89,7 +90,7 @@ void saveInvestors(){
 void printInvestor() {
    
     // system("cls");
-    printf("***************************\n\n");
+    printf("\n***************************\n\n");
     for (int i = 0; i < numInvestors; i++){   
         Investor *investor = investorsList[i];
         printf("nome: %s\ncodigo: %d\nperfil: %s\n\n", investor->name, investor->id, investor->profile);

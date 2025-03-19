@@ -1,4 +1,5 @@
 2;mineiro;conservador;
 3;kaua;arriscador;
-8;parr;moderado;
-10;rebeca;moderado;
+1;alissu;conservador;
+6;Luiz;ceara;
+4;Santana;Tres;
