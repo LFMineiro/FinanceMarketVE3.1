@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../headers/asset.h"
 
-typedef struct _asset {
-    int id;
-    char type[15];
-    char ticker[15];
-    float price;
-    char risk;
-} Asset;
+// typedef struct _asset {
+//     int id;
+//     char type[15];
+//     char ticker[15];
+//     float price;
+//     char risk;
+// } Asset;
 
 Asset **assetsList = NULL;
 int numAssets = 0;
@@ -32,9 +33,6 @@ Asset *createAsset(int id, const char *type, const char *ticker, float price, co
     return asset;
 }
 
-/*
-        Aqui no delete tem q ser visto se memoria foi completamente desalocada 
-*/
 void deleteAsset(int id) {
     for(int i = 0; i<numAssets; i++) {
         if(assetsList[i]->id == id) {
@@ -42,14 +40,15 @@ void deleteAsset(int id) {
             for(int j = i; j < numAssets - 1; j++) {
                 assetsList[j] = assetsList[j+1];
             }
+            numAssets--;
+            break;
         }
-        numAssets--;
-        break;
     }
 
 }
+
 void loadAssets() {
-    FILE *assetsFile = fopen("../files/assets.txt", "r");
+    FILE *assetsFile = fopen("./files/assets.txt", "r");
     if(!assetsFile) {
         printf("Erro ao abrir o arquivo!");
         exit(1);
@@ -69,7 +68,7 @@ void loadAssets() {
 }
 
 void saveAssets() {
-    FILE *assetsFile = fopen("../files/assets.txt", "w");
+    FILE *assetsFile = fopen("./files/assets.txt", "w");
     if(!assetsFile) {
         printf("Erro ao abrir o arquivo!");
         exit(1);
