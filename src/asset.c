@@ -3,14 +3,6 @@
 #include <string.h>
 #include "../headers/asset.h"
 
-// typedef struct _asset {
-//     int id;
-//     char type[15];
-//     char ticker[15];
-//     float price;
-//     char risk;
-// } Asset;
-
 Asset **assetsList = NULL;
 int numAssets = 0;
 

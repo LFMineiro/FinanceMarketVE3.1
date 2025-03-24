@@ -9,6 +9,9 @@ typedef struct _asset {
     char risk;
 } Asset;
 
+extern Asset **assetsList;
+extern int numAssets;
+
 Asset *createAsset(int id, const char *type, const char *ticker, float price, const char risk);
 void deleteAsset(int id);
 void loadAssets();

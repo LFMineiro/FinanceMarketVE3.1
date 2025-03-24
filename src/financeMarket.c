@@ -1,9 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../headers/investor.h" 
-#include "../headers/asset.h" 
-// #include "asset.c"
+#include "../headers/investor.h"
+#include "../headers/asset.h"
     
 int showMenu() {
 
@@ -17,6 +16,7 @@ int showMenu() {
     printf("5 - Listar todos Investidores cadastrados\n");
     printf("6 - Listar todos Ativos cadastrados\n");
     printf("7 - Sair \n\n");
+    
 
     printf("Digite a opcao: ");
     scanf("%d", &opcao);
