@@ -11,6 +11,7 @@ Investor* createInvestor(int id, const char *name, const char *profile);
 void deleteInvestor(int id);
 void loadInvestors();
 void saveInvestors();
+void registerInvestor();
 void printInvestor();
 
 #endif

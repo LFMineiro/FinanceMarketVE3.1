@@ -87,13 +87,32 @@ void saveInvestors(){
     fclose(investorsFile);
 }
 
+void registerInvestor(){
+    char name[50];
+    int id;
+    char profile[35];
+
+    printf("Cadastro do Investidor\n\n");                    
+    printf("Nome: ");
+    scanf(" %s", name );                     
+    printf("Codigo: ");
+    scanf("%d", &id);  
+    printf("Perfil: ");
+    scanf(" %s", profile );  
+    
+    loadInvestors();
+    createInvestor(id, name, profile); 
+    saveInvestors();
+
+    printf("Investidor criado com sucesso!\n");
+}
 void printInvestor() {
    
     // system("cls");
     printf("\n***************************\n\n");
     for (int i = 0; i < numInvestors; i++){   
         Investor *investor = investorsList[i];
-        printf("nome: %s\ncodigo: %d\nperfil: %s\n\n", investor->name, investor->id, investor->profile);
+        printf("Nome: %s\nCodigo: %d\nPerfil: %s\n\n", investor->name, investor->id, investor->profile);
         printf("***************************\n\n");
     }
     

@@ -74,6 +74,35 @@ void saveAssets() {
     }
 }
 
+void registerAsset(){
+    
+    int cod;
+    char type[15];
+    char ticker[15];
+    float price;
+    char risk;
+
+    printf("Cadastro do Ativo\n\n");                    
+    printf("Ticker: ");
+    scanf(" %s", ticker );                     
+    printf("Codigo: ");
+    scanf("%d", &cod);  
+    printf("Tipo: ");
+    scanf(" %s", type ); 
+
+    // Automatizar talvez com uma api, era muito o caso a partir daqui
+    printf("Preco Atual: ");
+    scanf("%f", &price );   
+    printf("Risco (L, M or H): ");
+    scanf(" %c", &risk ); 
+
+    // Cadastrar o Ativo
+    loadAssets();
+    createAsset(cod, type, ticker, price, risk);
+    //printAssets();
+    saveAssets();
+}
+
 void printAssets() {
     //system("cls");
     printf("Ativos\n*****************\n\n");
