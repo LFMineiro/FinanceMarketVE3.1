@@ -8,12 +8,11 @@
 
     
 int main() {
-
     
     int option; 
 
     option = showMenu();
-    processOption(option);
+    processOption(option); 
 
     return 0;
 }

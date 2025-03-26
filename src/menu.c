@@ -17,9 +17,11 @@ int showMenu() {
     printf("3 - Cadastrar um novo Ativo\n");
     printf("4 - Remover um Ativo\n");
     printf("5 - Comprar um Ativo\n"); ///MUDAR DEPOIS
-    printf("5 - Listar todos Investidores cadastrados\n");
-    printf("6 - Listar todos Ativos cadastrados\n");
-    printf("7 - Sair \n\n");
+    printf("6 - Listar todos Investidores cadastrados\n");
+    printf("7 - Listar todos Ativos cadastrados\n");
+    printf("8 - Filtrar Ativos por Investidor e Periodo\n");  
+    printf("9 - Filtrar Investidores por Ativo e Periodo\n");  
+    printf("10 - Sair \n\n");
     
 
     printf("Digite a opcao: ");
@@ -46,7 +48,6 @@ void processOption(int option) {
         
         case 1: 
 
-            // Form de Criação
             registerInvestor();
             break;
 
@@ -68,7 +69,7 @@ void processOption(int option) {
         case 4:
 
             // Remoção por código da lista de Ativos
-            printf("codigo do deletado: ");
+            printf("Codigo do ativo que iremos remover da lista: ");
             scanf(" %d", &cod);
     
             // Função para deletar o Ativo da lista e da memória
@@ -86,8 +87,14 @@ void processOption(int option) {
         case 7:
             printAssets();
             break;
+        case 8:
+            getAssetsByInvestorAndPeriod();
+            break;
+        case 9:
+            getInvestorsByAssetAndPeriod();
+            break;
         default: 
-            printf("digite uma opção valida");
+            printf("Digite uma opção valida");
             break;
     }
 
