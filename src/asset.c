@@ -97,11 +97,20 @@ void registerAsset(){
     scanf(" %c", &risk ); 
 
     // Cadastrar o Ativo
-    loadAssets();
     createAsset(cod, type, ticker, price, risk);
     //printAssets();
-    saveAssets();
 }
+
+Asset* searchAsset(int id){
+    for (int i = 0; i < numAssets; i++)
+    {
+        if(assetsList[i]->id == id){
+            
+            return assetsList[i];
+        }
+    }
+}
+
 
 void printAssets() {
     //system("cls");

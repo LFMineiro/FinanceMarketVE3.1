@@ -100,11 +100,18 @@ void registerInvestor(){
     printf("Perfil: ");
     scanf(" %s", profile );  
     
-    loadInvestors();
     createInvestor(id, name, profile); 
-    saveInvestors();
 
     printf("Investidor criado com sucesso!\n");
+}
+Investor* searchInvestor(int id){
+    for (int i = 0; i < numInvestors; i++)
+    {
+        if(investorsList[i]->id == id){
+            
+            return investorsList[i];
+        }
+    }
 }
 void printInvestor() {
    

@@ -12,6 +12,7 @@ void deleteInvestor(int id);
 void loadInvestors();
 void saveInvestors();
 void registerInvestor();
+Investor* searchInvestor(int id);
 void printInvestor();
 
 #endif

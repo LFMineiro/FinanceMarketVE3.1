@@ -14,6 +14,7 @@ void deleteAsset(int id);
 void loadAssets();
 void saveAssets();
 void registerAsset();
+Asset* searchAsset(int id);
 void printAssets();
 
 #endif

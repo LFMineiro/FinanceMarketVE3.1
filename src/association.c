@@ -12,28 +12,25 @@ void registerAssociation(){
     int id;
     char nameInvestor[35];
     char nameAsset[15];
-    char period[6];
+    char period[7];
     
     int idInvestor;
     int codAsset;
 
-    loadInvestor();
-	loadAssets();
-	
 	printAssets();
     printf("Qual o codigo do ativo comprado: ");
-    scanf(" %d", &codAsset);
-    Asset *tempAtivo = searchAsset(codAsset);  //implementar search
+    scanf("%d", &codAsset);
+    Asset *tempAtivo = searchAsset(codAsset);  
     strcpy(nameAsset, tempAtivo->ticker);
-    
-	printInvestor() ;
+
+	printInvestor();
     printf("Qual o codigo do investidor que comprou o ativo: ");
-    scanf(" %d", &idInvestor);
+    scanf("%d", &idInvestor);
     Investor *tempInvestor = searchInvestor(idInvestor);
     strcpy(nameInvestor, tempInvestor->name);
 		
 	printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
-	scanf(" %s", &period);
+	scanf("%s", period);
 		
 	createAssociation(id, nameInvestor, nameAsset, period);
 
@@ -86,7 +83,6 @@ void loadAssociations(){
     char tempPeriod[6];
 
     while (fscanf(associationsFile, "%d;%[^;];%[^;];%[^;];", &tempId, tempNameInvestor, tempNameAsset, tempPeriod) == 4){
-        //printf("-%d-%d-%d-%s\n", tempId, tempNameInvestor, tempNameAsset, tempPeriod);
 
         createAssociation(tempId, tempNameInvestor, tempNameAsset, tempPeriod);
     }
