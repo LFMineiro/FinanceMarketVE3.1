@@ -8,6 +8,9 @@
 Association** associationsList = NULL;
 int numAssociations = 0;
 
+Association** assetPerInvList = NULL;
+int numAux = 0;
+
 void registerAssociation(){
     int id;
     char nameInvestor[35];
@@ -80,7 +83,7 @@ void loadAssociations(){
     int tempId;
     char tempNameInvestor[35];
     char tempNameAsset[15];
-    char tempPeriod[6];
+    char tempPeriod[7];
 
     while (fscanf(associationsFile, "%d;%[^;];%[^;];%[^;];", &tempId, tempNameInvestor, tempNameAsset, tempPeriod) == 4){
 
@@ -104,3 +107,77 @@ void saveAssociations(){
     fclose(associationsFile);
 }
 void printAssociation();
+
+void getAssetsByInvestorAndPeriod() {
+
+    int id;
+    char period[7];
+    char nameInvestor[50];
+    // char nameAsset[35];
+	
+    printInvestor();
+	
+	printf("Voce deseja ver a carteira de qual investidor: ");
+	scanf("%d", &id);
+	
+	printf("Em qual periodo: ");
+	scanf(" %s", period);
+	
+    //obtem o nome do investidor que foi passado pelo codigo
+
+	Investor *tempInv = searchInvestor(id);
+	strcpy(nameInvestor, tempInv->name);
+    
+    printf("\nCarteira do Investidor %s no periodo %s\n\n", nameInvestor, period);
+	
+	for(int i = 0; i < numAssociations; i++) {  
+
+        /*  Percorre a lista e filtra pelo nome do investidor   
+            e por periodo, que foram passados pelo usuario */
+
+		if(strcmp(associationsList[i]->nameInvestor, nameInvestor) == 0 && strcmp(associationsList[i]->period, period) == 0) {
+					numAux++;
+                    printf("Ativo[%d] = %s\n", numAux, associationsList[i]->nameAsset);
+		}
+        
+	}
+    printf("\nEsse rapaz tem %d ativo(s) no periodo %s\n ", numAux, period);
+	
+}
+
+void getInvestorsByAssetAndPeriod() {
+
+    int id;
+    char period[7];
+    // char nameInvestor[50];
+    char nameAsset[35];
+	
+    printAssets();
+	
+	printf("Qual o codigo do ativo que voce quer verificar os investidores: ");
+	scanf("%d", &id);
+	
+	printf("Em qual periodo: ");
+	scanf(" %s", period);
+	
+    //obtem o nome do investidor que foi passado pelo codigo
+
+	Asset *tempAsset = searchAsset(id);
+	strcpy(nameAsset, tempAsset->ticker);
+    
+    printf("\nInvestidores que possuem o ativo %s no periodo %s\n\n", nameAsset, period);
+	
+	for(int i = 0; i < numAssociations; i++) {  
+
+        /*  Percorre a lista e filtra pelo nome do investidor   
+            e por periodo, que foram passados pelo usuario */
+
+		if(strcmp(associationsList[i]->nameAsset, nameAsset) == 0 && strcmp(associationsList[i]->period, period) == 0) {
+					numAux++;
+                    printf("Investidor[%d] = %s\n", numAux, associationsList[i]->nameInvestor);
+		}
+        
+	}
+    printf("\nEsse ativo tem %d investidor(es) no periodo %s\n ", numAux, period);
+	
+}

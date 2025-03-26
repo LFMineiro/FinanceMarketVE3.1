@@ -18,5 +18,7 @@ void loadAssociations();
 void saveAssociations();
 void registerAssociation();
 void printAssociation();
+void getAssetsByInvestorAndPeriod();
+void getInvestorsByAssetAndPeriod();
 
 #endif
