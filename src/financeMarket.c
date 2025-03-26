@@ -3,7 +3,9 @@
 #include <string.h>
 #include "../headers/investor.h"
 #include "../headers/asset.h"
+#include "../headers/association.h"
 #include "../headers/menu.h"
+
     
 int main() {
 
