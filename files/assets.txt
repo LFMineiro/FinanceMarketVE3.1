@@ -1,4 +1,2 @@
-1;AMER3;Action;M;7.18
-3;BBAS3;Acao;L;28.31
-2;PETR4;Acao;L;32.21
-4;LAVV3;Acao;L;9.74
+133;qeq;ahda;l;123.00;
+12;teste;titulo;L;13.00;

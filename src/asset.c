@@ -52,7 +52,7 @@ void loadAssets() {
     char tempRisk;
     float tempPrice;
     
-    while(fscanf(assetsFile, "%d;%[^;];%[^;];%c;%f", &tempId, tempTicker, tempType, &tempRisk, &tempPrice) == 5) {
+    while(fscanf(assetsFile, "%d;%[^;];%[^;];%c;%f;", &tempId, tempTicker, tempType, &tempRisk, &tempPrice) == 5) {
         createAsset(tempId, tempType,  tempTicker, tempPrice, tempRisk);
     }
 
@@ -70,35 +70,44 @@ void saveAssets() {
 
         // 0001;PETR4;ACTION;L;32.23
 
-        fprintf(assetsFile, "%d;%s;%s;%c;%0.2f\n", asset->id, asset->ticker, asset->type, asset->risk, asset->price);
+        fprintf(assetsFile, "%d;%s;%s;%c;%0.2f;\n", asset->id, asset->ticker, asset->type, asset->risk, asset->price);
     }
 }
 
 void registerAsset(){
     
     int cod;
-    char type[15];
+    int num_type = -1;
+    char available_types[2][15] = {"acao", "titulo"};
     char ticker[15];
     float price;
-    char risk;
+    int num_risk = -1;
+    char availeble_risks[3] = {'L', 'M', 'H'};
 
     printf("Cadastro do Ativo\n\n");                    
     printf("Ticker: ");
-    scanf(" %s", ticker );                     
+    scanf(" %s", ticker );   
+
     printf("Codigo: ");
     scanf("%d", &cod);  
-    printf("Tipo: ");
-    scanf(" %s", type ); 
 
-    // Automatizar talvez com uma api, era muito o caso a partir daqui
+    while(num_type < 0 || num_type > 2){
+        printf("Tipo: \n[0] - Acao\n[1] - Titulo\n");
+        scanf("%d", &num_type); 
+    }
+
     printf("Preco Atual: ");
     scanf("%f", &price );   
-    printf("Risco (L, M or H): ");
-    scanf(" %c", &risk ); 
+
+    while( num_risk < 0 || num_risk > 2){
+        scanf("%d", &num_risk); 
+        printf("Risco: \n[0] - Low\n[1] - Medium\n[2] - High\n");
+    }
 
     // Cadastrar o Ativo
-    createAsset(cod, type, ticker, price, risk);
-    //printAssets();
+    createAsset(cod, available_types[num_type], ticker, price, availeble_risks[num_risk]);
+    
+    printf("Ativo criado com sucesso!\n");
 }
 
 Asset* searchAsset(int id){

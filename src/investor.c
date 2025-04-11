@@ -90,17 +90,20 @@ void saveInvestors(){
 void registerInvestor(){
     char name[50];
     int id;
-    char profile[35];
+    int num_profile = -1;
+    char available_profiles[3][35] = {"Conservador", "arriscador", "outro"};
 
-    printf("Cadastro do Investidor\n\n");                    
+    printf("Cadastro do Investidor\n\n");
     printf("Nome: ");
-    scanf(" %s", name );                     
+    scanf(" %s", name );
     printf("Codigo: ");
-    scanf("%d", &id);  
-    printf("Perfil: ");
-    scanf(" %s", profile );  
+    scanf("%d", &id);
+    while (num_profile < 0 || num_profile > 2){
+        printf("Perfil: \n[0] - Conservador\n[1] - Arricadro\n[2] - Outro\n");
+        scanf("%d", &num_profile);  
+    }
     
-    createInvestor(id, name, profile); 
+    createInvestor(id, name, available_profiles[num_profile]); 
 
     printf("Investidor criado com sucesso!\n");
 }
