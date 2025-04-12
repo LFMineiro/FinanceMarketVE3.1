@@ -83,31 +83,36 @@ void registerAsset(){
     float price;
     int num_risk = -1;
     char availeble_risks[3] = {'L', 'M', 'H'};
-
+    
     printf("Cadastro do Ativo\n\n");                    
     printf("Ticker: ");
     scanf(" %s", ticker );   
-
+    
     printf("Codigo: ");
     scanf("%d", &cod);  
-
+    int existe = idAssetExist(cod);
+    
     while(num_type < 0 || num_type > 2){
-        printf("Tipo: \n[0] - Acao\n[1] - Titulo\n");
+        printf("[0] - Acao\n[1] - Titulo\n");
+        printf("Tipo: ");
         scanf("%d", &num_type); 
     }
 
     printf("Preco Atual: ");
     scanf("%f", &price );   
-
+    
     while( num_risk < 0 || num_risk > 2){
-        scanf("%d", &num_risk); 
-        printf("Risco: \n[0] - Low\n[1] - Medium\n[2] - High\n");
+        printf("[0] - Low\n[1] - Medium\n[2] - High\n");
+        printf("Risco: ");       
+        scanf(" %d", &num_risk); 
     }
 
     // Cadastrar o Ativo
-    createAsset(cod, available_types[num_type], ticker, price, availeble_risks[num_risk]);
-    
-    printf("Ativo criado com sucesso!\n");
+    if(!existe) {
+        createAsset(cod, available_types[num_type], ticker, price, availeble_risks[num_risk]);       
+        printf("Ativo criado com sucesso!\n");
+    }
+    else printf("codigo ja existente");
 }
 
 Asset* searchAsset(int id){
@@ -126,8 +131,17 @@ void printAssets() {
     printf("Ativos\n*****************\n\n");
     for(int i = 0; i< numAssets; i++) {
         Asset *asset = assetsList[i];
-        printf("Ticker: %s\nCodigo: %d\nTipo: %s\nRisco: %c\nPreco Atual: %0.2f\n ", asset->ticker, asset->id,  asset->type, asset->risk, asset->price );
+        printf("Ticker: %s\nCodigo: %0.4d\nTipo: %s\nRisco: %c\nPreco Atual: %0.2f\n ", asset->ticker, asset->id,  asset->type, asset->risk, asset->price );
         printf("\n*****************\n\n");
     }
     
+}
+
+int idAssetExist(int id) {
+    for(int i = 0; i<numAssets; i++) {
+        if(assetsList[i]->id == id) {
+            return 1;
+        }
+    }
+    return 0;
 }

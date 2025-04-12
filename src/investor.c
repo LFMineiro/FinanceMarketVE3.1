@@ -102,10 +102,13 @@ void registerInvestor(){
         printf("Perfil: \n[0] - Conservador\n[1] - Arricadro\n[2] - Outro\n");
         scanf("%d", &num_profile);  
     }
-    
-    createInvestor(id, name, available_profiles[num_profile]); 
+    int existe = idInvestorExist(id);
+    if(!existe){
+        createInvestor(id, name, available_profiles[num_profile]); 
+        printf("Investidor criado com sucesso!\n");
+    }
+    else printf("Ja existe o codigo");
 
-    printf("Investidor criado com sucesso!\n");
 }
 Investor* searchInvestor(int id){
     for (int i = 0; i < numInvestors; i++)
@@ -122,8 +125,17 @@ void printInvestor() {
     printf("\n***************************\n\n");
     for (int i = 0; i < numInvestors; i++){   
         Investor *investor = investorsList[i];
-        printf("Nome: %s\nCodigo: %d\nPerfil: %s\n\n", investor->name, investor->id, investor->profile);
+        printf("Nome: %s\nCodigo: %0.5d\nPerfil: %s\n\n", investor->name, investor->id, investor->profile);
         printf("***************************\n\n");
     }
     
+}
+
+int idInvestorExist(int id) {
+    for(int i = 0; i<numInvestors; i++) {
+        if(investorsList[i]->id == id) {
+            return 1;
+        }
+    }
+    return 0;
 }

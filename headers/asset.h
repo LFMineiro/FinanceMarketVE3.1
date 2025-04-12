@@ -16,5 +16,6 @@ void saveAssets();
 void registerAsset();
 Asset* searchAsset(int id);
 void printAssets();
+int idAssetExist(int id);
 
 #endif

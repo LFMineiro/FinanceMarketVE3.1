@@ -14,5 +14,6 @@ void saveInvestors();
 void registerInvestor();
 Investor* searchInvestor(int id);
 void printInvestor();
+int idInvestorExist(int id);
 
 #endif
