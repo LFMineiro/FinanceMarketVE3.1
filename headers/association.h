@@ -17,8 +17,8 @@ void deleteAssociation(int id);
 void loadAssociations();
 void saveAssociations();
 void registerAssociation();
-void printAssociation();
 void getAssetsByInvestorAndPeriod();
 void getInvestorsByAssetAndPeriod();
+int idAssociationExist(int id);
 
 #endif

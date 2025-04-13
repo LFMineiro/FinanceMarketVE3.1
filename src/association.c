@@ -19,6 +19,17 @@ void registerAssociation(){
     
     int idInvestor;
     int codAsset;
+    int existe = 1;
+
+    while(existe) {
+    printf("Digite o codigo referente a sua compra: ");
+    scanf("%d", &id);
+    existe = idAssociationExist(id);
+    if(existe) {
+        printf("Esse codigo ja existe\n");
+    }
+
+    }
 
 	printAssets();
     printf("Qual o codigo do ativo comprado: ");
@@ -106,7 +117,6 @@ void saveAssociations(){
 
     fclose(associationsFile);
 }
-void printAssociation();
 
 void getAssetsByInvestorAndPeriod() {
 
@@ -181,3 +191,13 @@ void getInvestorsByAssetAndPeriod() {
     printf("\nEsse ativo tem %d investidor(es) no periodo %s\n ", numAux, period);
 	
 }
+
+int idAssociationExist(int id) {
+    for(int i=0; i< numAssociations; i++) {
+        if(associationsList[i]->id == id) 
+            return 1;
+        }
+        return 0;
+        
+}
+
