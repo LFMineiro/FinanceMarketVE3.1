@@ -1,4 +1,2 @@
-133;qeq;ahda;l;123.00;
-12;teste;titulo;L;13.00;
 12;PETR4;acao;L;23.21;
 13;BBSA3;acao;M;21.21;

@@ -138,7 +138,10 @@ void getAssetsByInvestorAndPeriod() {
 	Investor *tempInv = searchInvestor(id);
 	strcpy(nameInvestor, tempInv->name);
     
-    printf("\nCarteira do Investidor %s no periodo %s\n\n", nameInvestor, period);
+    printf("\n======== CARTEIRA DO INVESTIDOR ========\n");
+    printf("Investidor: %s\n", nameInvestor);
+    printf("Periodo: %s\n", period);
+    printf("-------------------------------------------\n");
 	
 	for(int i = 0; i < numAssociations; i++) {  
 
@@ -175,19 +178,23 @@ void getInvestorsByAssetAndPeriod() {
 	Asset *tempAsset = searchAsset(id);
 	strcpy(nameAsset, tempAsset->ticker);
     
-    printf("\nInvestidores que possuem o ativo %s no periodo %s\n\n", nameAsset, period);
 	
+    printf("\n=========== INVESTIDORES DO ATIVO ===========\n");
+    printf("Ativo: %s\nPeriodo: %s\n", nameAsset, period);
+    printf("-------------------------------------------\n");
+
 	for(int i = 0; i < numAssociations; i++) {  
 
         /*  Percorre a lista e filtra pelo nome do investidor   
             e por periodo, que foram passados pelo usuario */
 
 		if(strcmp(associationsList[i]->nameAsset, nameAsset) == 0 && strcmp(associationsList[i]->period, period) == 0) {
-					numAux++;
+					numAux++;                
                     printf("Investidor[%d] = %s\n", numAux, associationsList[i]->nameInvestor);
-		}
-        
-	}
+                }
+                
+            }
+            if(numAux == 0) printf("Esse ativo nao possui investidores nesse periodo");                 
     printf("\nEsse ativo tem %d investidor(es) no periodo %s\n ", numAux, period);
 	
 }

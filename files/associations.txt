@@ -1,2 +1,6 @@
 123;pedro;BBSA3;2024.1;
 1;pedro;BBSA3;2025.2;
+2025;alissu;qeq;2025.2;
+1003;Santana;PETR4;2024.1;
+1345;pedro;BBSA3;2025.1;
+7020;pedro;PETR4;2025.1;

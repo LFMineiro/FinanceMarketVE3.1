@@ -78,7 +78,7 @@ void registerAsset(){
     
     int cod;
     int num_type = -1;
-    char available_types[2][15] = {"acao", "titulo"};
+    char available_types[5][15] = {"Acao", "Titulo", "Cripto", "CDB", "LCI"};
     char ticker[15];
     float price;
     int num_risk = -1;
@@ -92,8 +92,8 @@ void registerAsset(){
     scanf("%d", &cod);  
     int existe = idAssetExist(cod);
     
-    while(num_type < 0 || num_type > 2){
-        printf("[0] - Acao\n[1] - Titulo\n");
+    while(num_type < 0 || num_type > 5){
+        printf("[0] - Acao\n[1] - Titulo\n[2] - Cripto\n[3] - CDB\n[4] - LCI");
         printf("Tipo: ");
         scanf("%d", &num_type); 
     }
@@ -127,15 +127,17 @@ Asset* searchAsset(int id){
 
 
 void printAssets() {
-    //system("cls");
-    printf("Ativos\n*****************\n\n");
-    for(int i = 0; i< numAssets; i++) {
+    printf("\n%-6s | %-10s | %-15s | %-5s | %-10s\n", 
+        "Cod", "Ticker", "Tipo", "Risco", "Preco");
+    printf("--------------------------------------------------------------\n");
+
+    for(int i = 0; i < numAssets; i++) {
         Asset *asset = assetsList[i];
-        printf("Ticker: %s\nCodigo: %0.4d\nTipo: %s\nRisco: %c\nPreco Atual: %0.2f\n ", asset->ticker, asset->id,  asset->type, asset->risk, asset->price );
-        printf("\n*****************\n\n");
+        printf("%04d   | %-10.8s | %-15.12s | %-5c | %8.2f\n", 
+            asset->id, asset->ticker, asset->type, asset->risk, asset->price);
     }
-    
 }
+
 
 int idAssetExist(int id) {
     for(int i = 0; i<numAssets; i++) {

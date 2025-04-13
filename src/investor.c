@@ -91,17 +91,19 @@ void registerInvestor(){
     char name[50];
     int id;
     int num_profile = -1;
-    char available_profiles[3][35] = {"Conservador", "arriscador", "outro"};
+    char available_profiles[3][35] = {"Conservador", "Moderado", "Agressivo"};
 
     printf("Cadastro do Investidor\n\n");
     printf("Nome: ");
     scanf(" %s", name );
     printf("Codigo: ");
     scanf("%d", &id);
+    
     while (num_profile < 0 || num_profile > 2){
-        printf("Perfil: \n[0] - Conservador\n[1] - Arricadro\n[2] - Outro\n");
+        printf("Perfil: \n[0] - Conservador\n[1] - Moderado\n[2] - Agressivo\n");
         scanf("%d", &num_profile);  
     }
+    
     int existe = idInvestorExist(id);
     if(!existe){
         createInvestor(id, name, available_profiles[num_profile]); 
@@ -120,15 +122,16 @@ Investor* searchInvestor(int id){
     }
 }
 void printInvestor() {
-   
-    // system("cls");
-    printf("\n***************************\n\n");
-    for (int i = 0; i < numInvestors; i++){   
+    printf("\n=========== LISTA DE INVESTIDORES ===========\n\n");
+
+    for (int i = 0; i < numInvestors; i++) {
         Investor *investor = investorsList[i];
-        printf("Nome: %s\nCodigo: %0.5d\nPerfil: %s\n\n", investor->name, investor->id, investor->profile);
-        printf("***************************\n\n");
+        printf("+-----------------------------------------+\n");
+        printf("| Nome   : %-30.30s |\n", investor->name);
+        printf("| Codigo : %-30.05d |\n", investor->id);
+        printf("| Perfil : %-30.30s |\n", investor->profile);
+        printf("+-----------------------------------------+\n\n");
     }
-    
 }
 
 int idInvestorExist(int id) {
