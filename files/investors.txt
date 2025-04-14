@@ -1,6 +1,4 @@
-2;mineiro;conservador;
-3;kaua;arriscador;
 1;alissu;conservador;
-6;Luiz;ceara;
-4;Santana;Tres;
-2321;pedro;arriscador;
+3;kaus;Moderado;
+4;castr;Moderado;
+5;teste;Agressivo;

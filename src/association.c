@@ -9,8 +9,6 @@ Association** associationsList = NULL;
 int numAssociations = 0;
 
 void registerAssociation(){
-    int id;
-    char ids[16];
     char nameInvestor[35];
     char nameAsset[15];
     char period[7];
@@ -22,16 +20,6 @@ void registerAssociation(){
     int existInvestor = 0;
     int existAsset = 0;
     int isPeriodValid = 1;
-
-    while(existAssociation) {
-        printf("Digite o codigo referente a sua compra: ");
-        scanf("%d", &id);
-        existAssociation = idAssociationExist(id);
-        if(existAssociation) {
-            printf("Esse codigo ja existe\n");
-        }
-
-    }
 
 	printAssets();
 
@@ -73,6 +61,9 @@ void registerAssociation(){
         else 
             printf("\n========== Digite um periodo valido ========== \n");
     }
+
+    int id = 1;
+    if(associationsList) id = associationsList[numAssociations - 1]->id + 1;
 	createAssociation(id, nameInvestor, nameAsset, period);
 
     printf("Associacao criada!\n");
@@ -261,7 +252,7 @@ void getInvestorsByAssetAndPeriod() {
                 
     }
     if(numAux == 0) printf("Esse Ativo nao possui investidores nesse periodo"); 
-    else if(numAux == 1)vprintf("\nEsse Ativo tem %d Investidor no periodo %s\n ", numAux, period);
+    else if(numAux == 1) printf("\nEsse Ativo tem %d Investidor no periodo %s\n ", numAux, period);
     else printf("\nEsse Ativo tem %d Investidores no periodo %s\n ", numAux, period);
 	
 }

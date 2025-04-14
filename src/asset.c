@@ -80,7 +80,6 @@ void saveAssets() {
 
 void registerAsset(){
     
-    int cod;
     int num_type = -1;
     char available_types[5][15] = {"Acao", "Titulo", "Cripto", "CDB", "LCI"};
     char ticker[15];
@@ -91,10 +90,6 @@ void registerAsset(){
     printf("Cadastro do Ativo\n\n");                    
     printf("Ticker (Ex: PETR4): ");
     scanf(" %s", ticker );   
-    
-    printf("Codigo: ");
-    scanf("%d", &cod);  
-    int existe = idAssetExist(cod);
     
     while(num_type < 0 || num_type > 4){
         printf("[0] - Acao\n[1] - Titulo\n[2] - Cripto\n[3] - CDB\n[4] - LCI\n");
@@ -112,11 +107,11 @@ void registerAsset(){
     }
 
     // Cadastrar o Ativo
-    if(!existe) {
-        createAsset(cod, available_types[num_type], ticker, price, availeble_risks[num_risk]);       
-        printf("Ativo criado com sucesso!\n");
-    }
-    else printf("codigo ja existente");
+    int id = 1;
+    if(assetsList) id = assetsList[numAssets - 1]->id + 1;
+    createAsset(id, available_types[num_type], ticker, price, availeble_risks[num_risk]);       
+    printf("Ativo criado com sucesso!\n");
+    
 }
 
 Asset* searchAsset(int id){

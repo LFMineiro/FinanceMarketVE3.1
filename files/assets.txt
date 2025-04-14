@@ -1,2 +1,1 @@
-12;PETR4;acao;L;23.21;
-13;BBSA3;acao;M;21.21;
+1;rer;Titulo;M;1.00;

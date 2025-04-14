@@ -92,28 +92,23 @@ void saveInvestors(){
 
 void registerInvestor(){
     char name[50];
-    int id;
     int num_profile = -1;
     char available_profiles[3][35] = {"Conservador", "Moderado", "Agressivo"};
 
     printf("Cadastro do Investidor\n\n");
     printf("Nome: ");
     scanf(" %s", name );
-    printf("Codigo: ");
-    scanf("%d", &id);
-    
+
     while (num_profile < 0 || num_profile > 2){
         printf("[0] - Conservador\n[1] - Moderado\n[2] - Agressivo\nPerfil: ");
         scanf("%d", &num_profile);  
     }
     
-    int existe = idInvestorExist(id);
-    if(!existe){
-        createInvestor(id, name, available_profiles[num_profile]); 
-        printf("Investidor criado com sucesso!\n");
-    }
-    else printf("Ja existe o codigo");
-
+    int id = 1;
+    if(investorsList) id = investorsList[numInvestors -1]->id + 1;
+    
+    createInvestor(id, name, available_profiles[num_profile]); 
+    printf("Investidor criado com sucesso!\n");
 }
 Investor* searchInvestor(int id){
     for (int i = 0; i < numInvestors; i++)
