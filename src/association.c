@@ -261,7 +261,7 @@ void getInvestorsByAssetAndPeriod() {
                 
     }
     if(numAux == 0) printf("Esse Ativo nao possui investidores nesse periodo"); 
-    else if(numAux == 1)vprintf("\nEsse Ativo tem %d Investidor no periodo %s\n ", numAux, period);
+    else if(numAux == 1) printf("\nEsse Ativo tem %d Investidor no periodo %s\n ", numAux, period);
     else printf("\nEsse Ativo tem %d Investidores no periodo %s\n ", numAux, period);
 	
 }
