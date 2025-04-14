@@ -155,4 +155,16 @@ Para simular a compra de ativos por investidores, é utilizada uma terceira estr
 
 ### 💾 Funcionalidade de salvamento e recuperação
 
-Todos os dados são salvos em arquivos .txt, para isso utilizamos as funções ``saveInvestors()``, ``saveAssets()`` e ``saveAssociations()`` e para recuperação dos dados usamos ``loadInvestors()``, ``loadAssets()`` e ``loadAssociations()``,
+Todos os dados são salvos em arquivos .txt, para isso utilizamos as funções ``saveInvestors()``, ``saveAssets()`` e ``saveAssociations()`` e para recuperação dos dados usamos ``loadInvestors()``, ``loadAssets()`` e ``loadAssociations()``
+
+...
+
+## 🔗 Repositório
+
+[github.com/LFMineiro/FinanceMarketVE3.1](https://github.com/LFMineiro/FinanceMarketVE3.1.git)
+
+## 🧑‍💻 Desenvolvedores
+
+- Luiz Fernando Lessa Mineiro Albuquerque – [[@LFMineiro](https://github.com/LFMineiro)]
+- Álisson Nunes Santana - [[@alisson94](https://github.com/alisson94)]
+
