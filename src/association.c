@@ -8,7 +8,6 @@
 Association** associationsList = NULL;
 int numAssociations = 0;
 
-Association** assetPerInvList = NULL;
 int numAux = 0;
 
 void registerAssociation(){
@@ -19,44 +18,62 @@ void registerAssociation(){
     
     int idInvestor;
     int codAsset;
-    int existe = 1;
 
-    while(existe) {
-    printf("Digite o codigo referente a sua compra: ");
-    scanf("%d", &id);
-    existe = idAssociationExist(id);
-    if(existe) {
-        printf("Esse codigo ja existe\n");
-    }
+    int existAssociation = 1;
+    int existInvestor = 0;
+    int existAsset = 0;
+    int isPeriodValid = 1;
+
+    while(existAssociation) {
+        printf("Digite o codigo referente a sua compra: ");
+        scanf("%d", &id);
+        existAssociation = idAssociationExist(id);
+        if(existAssociation) {
+            printf("Esse codigo ja existe\n");
+        }
 
     }
 
 	printAssets();
-    printf("Qual o codigo do ativo comprado: ");
-    scanf("%d", &codAsset);
+
+    while (!existAsset){
+        printf("Qual o codigo do ativo comprado: ");
+        scanf("%d", &codAsset);
+
+        existAsset = idAssetExist(codAsset);
+        if(!existAsset){
+            printf("Nao existe Ativo com esse codigo\n");
+        }
+    }
+    
     Asset *tempAtivo = searchAsset(codAsset);  
     strcpy(nameAsset, tempAtivo->ticker);
 
 	printInvestor();
-    printf("Qual o codigo do investidor que comprou o ativo: ");
-    scanf("%d", &idInvestor);
+
+    while (!existInvestor){
+        printf("Qual o codigo do investidor que comprou o ativo: ");
+        scanf("%d", &idInvestor);
+
+        existInvestor = idInvestorExist(idInvestor);
+        if(!existInvestor){
+            printf("Nao existe Investidor com esse codigo\n");
+        }
+    }
+
     Investor *tempInvestor = searchInvestor(idInvestor);
     strcpy(nameInvestor, tempInvestor->name);
 
     // Validação do Periodo da Compra
-    int valido = 1;
-	while(valido)	{
-        
+	while(isPeriodValid){
         printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
 	    scanf("%s", period);
 
         if(period[4] == '.' && (period[5] == '1' || period[5] == '2')) 
-            valido = 0;
+            isPeriodValid = 0;
         else 
             printf("\n========== Digite um periodo valido ========== \n");
-    
-    
-}
+    }
 		
 	createAssociation(id, nameInvestor, nameAsset, period);
 
@@ -97,6 +114,9 @@ void deleteAssociation(int id){
     
 }
 void loadAssociations(){
+    associationsList = NULL;
+    numAssociations = 0;
+
     FILE *associationsFile = fopen("files/associations.txt", "r");
     if(!associationsFile){
         printf("Erro ao carregar arquivo");
@@ -135,18 +155,33 @@ void getAssetsByInvestorAndPeriod() {
     int id;
     char period[7];
     char nameInvestor[50];
-    // char nameAsset[35];
+    
+    int existInvestor = 0;
+    int isPeriodValid = 1;
 	
     printInvestor();
 	
-	printf("Voce deseja ver a carteira de qual investidor: ");
-	scanf("%d", &id);
-	
-	printf("Em qual periodo: ");
-	scanf(" %s", period);
+    while (!existInvestor){
+        printf("Voce deseja ver a carteira de qual investidor: ");
+	    scanf("%d", &id);
+
+        existInvestor = idInvestorExist(id);
+        if(!existInvestor){
+            printf("Nao existe Investidor com esse codigo\n");
+        }
+    }
+
+	while(isPeriodValid){
+        printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
+	    scanf("%s", period);
+
+        if(period[4] == '.' && (period[5] == '1' || period[5] == '2')) 
+            isPeriodValid = 0;
+        else 
+            printf("\n========== Digite um periodo valido ========== \n");
+    }
 	
     //obtem o nome do investidor que foi passado pelo codigo
-
 	Investor *tempInv = searchInvestor(id);
 	strcpy(nameInvestor, tempInv->name);
     
@@ -161,12 +196,13 @@ void getAssetsByInvestorAndPeriod() {
             e por periodo, que foram passados pelo usuario */
 
 		if(strcmp(associationsList[i]->nameInvestor, nameInvestor) == 0 && strcmp(associationsList[i]->period, period) == 0) {
-					numAux++;
-                    printf("Ativo[%d] = %s\n", numAux, associationsList[i]->nameAsset);
+            numAux++;
+            printf("Ativo[%d] = %s\n", numAux, associationsList[i]->nameAsset);
 		}
         
 	}
-    printf("\nEsse rapaz tem %d ativo(s) no periodo %s\n ", numAux, period);
+    if(numAux == 0) printf("Esse Investidor nao possui Ativos nesse periodo");                 
+    printf("\nEsse Investidor tem %d ativo(s) no periodo %s\n ", numAux, period);
 	
 }
 
@@ -174,16 +210,32 @@ void getInvestorsByAssetAndPeriod() {
 
     int id;
     char period[7];
-    // char nameInvestor[50];
     char nameAsset[35];
-	
+
+    int existAsset = 0;
+	int isPeriodValid = 1;
+    
     printAssets();
+
+    while (!existAsset){
+	    printf("Qual o codigo do ativo que voce quer verificar os investidores: ");
+        scanf("%d", &id);
+
+        existAsset = idAssetExist(id);
+        if(!existAsset){
+            printf("Nao existe Ativo com esse codigo\n");
+        }
+    }
 	
-	printf("Qual o codigo do ativo que voce quer verificar os investidores: ");
-	scanf("%d", &id);
-	
-	printf("Em qual periodo: ");
-	scanf(" %s", period);
+	while(isPeriodValid){
+        printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
+	    scanf("%s", period);
+
+        if(period[4] == '.' && (period[5] == '1' || period[5] == '2')) 
+            isPeriodValid = 0;
+        else 
+            printf("\n========== Digite um periodo valido ========== \n");
+    }
 	
     //obtem o nome do investidor que foi passado pelo codigo
 
@@ -201,13 +253,13 @@ void getInvestorsByAssetAndPeriod() {
             e por periodo, que foram passados pelo usuario */
 
 		if(strcmp(associationsList[i]->nameAsset, nameAsset) == 0 && strcmp(associationsList[i]->period, period) == 0) {
-					numAux++;                
-                    printf("Investidor[%d] = %s\n", numAux, associationsList[i]->nameInvestor);
-                }
+            numAux++;                
+            printf("Investidor[%d] = %s\n", numAux, associationsList[i]->nameInvestor);
+        }
                 
-            }
-            if(numAux == 0) printf("Esse ativo nao possui investidores nesse periodo");                 
-    printf("\nEsse ativo tem %d investidor(es) no periodo %s\n ", numAux, period);
+    }
+    if(numAux == 0) printf("Esse Ativo nao possui investidores nesse periodo");                 
+    printf("\nEsse Ativo tem %d Investidor(es) no periodo %s\n ", numAux, period);
 	
 }
 

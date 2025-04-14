@@ -11,12 +11,14 @@ int main() {
     
     int option; 
 
-    option = showMenu();
-    processOption(option);
-        // char period[7];
-        // printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
-        // scanf("%s", period);
-        // printf(" %c", period[4]);
+    printf("========================================\n");
+    printf("  Bem-vindo ao Sistema de Investimentos  \n");
+    printf("========================================\n\n");
+
+    while(1){
+        option = showMenu();
+        processOption(option);
+    }
 
     return 0;
 }

@@ -40,6 +40,8 @@ void deleteAsset(int id) {
 }
 
 void loadAssets() {
+    assetsList = NULL;
+    numAssets = 0;
     FILE *assetsFile = fopen("./files/assets.txt", "r");
     if(!assetsFile) {
         printf("Erro ao abrir o arquivo!");
@@ -60,7 +62,7 @@ void loadAssets() {
 }
 
 void saveAssets() {
-    FILE *assetsFile = fopen("./files/assets.txt", "w");
+    FILE *assetsFile = fopen("files/assets.txt", "w");
     if(!assetsFile) {
         printf("Erro ao abrir o arquivo!");
         exit(1);
@@ -72,6 +74,8 @@ void saveAssets() {
 
         fprintf(assetsFile, "%d;%s;%s;%c;%0.2f;\n", asset->id, asset->ticker, asset->type, asset->risk, asset->price);
     }
+
+    fclose(assetsFile);
 }
 
 void registerAsset(){
@@ -85,15 +89,15 @@ void registerAsset(){
     char availeble_risks[3] = {'L', 'M', 'H'};
     
     printf("Cadastro do Ativo\n\n");                    
-    printf("Ticker: ");
+    printf("Ticker (Ex: PETR4): ");
     scanf(" %s", ticker );   
     
     printf("Codigo: ");
     scanf("%d", &cod);  
     int existe = idAssetExist(cod);
     
-    while(num_type < 0 || num_type > 5){
-        printf("[0] - Acao\n[1] - Titulo\n[2] - Cripto\n[3] - CDB\n[4] - LCI");
+    while(num_type < 0 || num_type > 4){
+        printf("[0] - Acao\n[1] - Titulo\n[2] - Cripto\n[3] - CDB\n[4] - LCI\n");
         printf("Tipo: ");
         scanf("%d", &num_type); 
     }

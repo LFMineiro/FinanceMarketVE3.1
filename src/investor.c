@@ -53,6 +53,9 @@ void deleteInvestor(int id){
 }
 
 void loadInvestors(){
+    investorsList = NULL;
+    numInvestors = 0;
+
     FILE *investorsFile = fopen("files/investors.txt", "r");
     if(!investorsFile){
         printf("Erro ao ler arquivo");
@@ -100,7 +103,7 @@ void registerInvestor(){
     scanf("%d", &id);
     
     while (num_profile < 0 || num_profile > 2){
-        printf("Perfil: \n[0] - Conservador\n[1] - Moderado\n[2] - Agressivo\n");
+        printf("[0] - Conservador\n[1] - Moderado\n[2] - Agressivo\nPerfil: ");
         scanf("%d", &num_profile);  
     }
     
