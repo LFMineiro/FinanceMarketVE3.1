@@ -1,2 +1,2 @@
-3;BBAS3;Acao;M;28.01
-2;PETR4;Acao;L;32.23
+12;PETR4;acao;L;23.21;
+13;BBSA3;acao;M;21.21;
