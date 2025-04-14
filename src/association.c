@@ -8,10 +8,9 @@
 Association** associationsList = NULL;
 int numAssociations = 0;
 
-int numAux = 0;
-
 void registerAssociation(){
     int id;
+    char ids[16];
     char nameInvestor[35];
     char nameAsset[15];
     char period[7];
@@ -74,7 +73,6 @@ void registerAssociation(){
         else 
             printf("\n========== Digite um periodo valido ========== \n");
     }
-		
 	createAssociation(id, nameInvestor, nameAsset, period);
 
     printf("Associacao criada!\n");
@@ -151,6 +149,7 @@ void saveAssociations(){
 }
 
 void getAssetsByInvestorAndPeriod() {
+    int numAux = 0;
 
     int id;
     char period[7];
@@ -201,12 +200,15 @@ void getAssetsByInvestorAndPeriod() {
 		}
         
 	}
-    if(numAux == 0) printf("Esse Investidor nao possui Ativos nesse periodo");                 
-    printf("\nEsse Investidor tem %d ativo(s) no periodo %s\n ", numAux, period);
+
+    if(numAux == 0) printf("Esse Investidor nao possui Ativos nesse periodo\n");                 
+    else if(numAux == 1) printf("\nEsse Investidor tem %d ativo no periodo %s\n ", numAux, period);
+    else printf("\nEsse Investidor tem %d ativos no periodo %s\n ", numAux, period);
 	
 }
 
 void getInvestorsByAssetAndPeriod() {
+    int numAux = 0;
 
     int id;
     char period[7];
@@ -258,8 +260,9 @@ void getInvestorsByAssetAndPeriod() {
         }
                 
     }
-    if(numAux == 0) printf("Esse Ativo nao possui investidores nesse periodo");                 
-    printf("\nEsse Ativo tem %d Investidor(es) no periodo %s\n ", numAux, period);
+    if(numAux == 0) printf("Esse Ativo nao possui investidores nesse periodo"); 
+    else if(numAux == 1)vprintf("\nEsse Ativo tem %d Investidor no periodo %s\n ", numAux, period);
+    else printf("\nEsse Ativo tem %d Investidores no periodo %s\n ", numAux, period);
 	
 }
 
