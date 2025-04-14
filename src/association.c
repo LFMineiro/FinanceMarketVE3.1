@@ -42,9 +42,21 @@ void registerAssociation(){
     scanf("%d", &idInvestor);
     Investor *tempInvestor = searchInvestor(idInvestor);
     strcpy(nameInvestor, tempInvestor->name);
-		
-	printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
-	scanf("%s", period);
+
+    // Validação do Periodo da Compra
+    int valido = 1;
+	while(valido)	{
+        
+        printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
+	    scanf("%s", period);
+
+        if(period[4] == '.' && (period[5] == '1' || period[5] == '2')) 
+            valido = 0;
+        else 
+            printf("\n========== Digite um periodo valido ========== \n");
+    
+    
+}
 		
 	createAssociation(id, nameInvestor, nameAsset, period);
 
