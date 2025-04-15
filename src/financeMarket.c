@@ -6,7 +6,10 @@
 #include "../headers/association.h"
 #include "../headers/menu.h"
 
-    
+/*
+    POR FAVOR SENHOR MONITOR, LEIA O README PRA VER O ENUNCIADO
+*/
+
 int main() {
     
     int option; 
@@ -19,16 +22,14 @@ int main() {
     while(isContinue == 's' || isContinue == 'S'){
         option = showMenu();
         processOption(option);
-            printf("Voce deseja continuar?\n[S]-Sim [N]-Nao \n");
-            scanf(" %c", &isContinue);
-        
-        while (isContinue != 'S' && isContinue != 's' &&
-            isContinue != 'N' && isContinue != 'n') {
-                printf("Resposta invalida. Tente novamente.\n[S] - Sim  [N] - Nao\n");
-                scanf(" %c", &isContinue);
-     }
+
+        printf("\nVoce deseja continuar?\n[S]-Sim\n");
+        scanf(" %c", &isContinue);
         
     }
+
+    printf("\nFechando programa. \n");
+
 
     return 0;
 }

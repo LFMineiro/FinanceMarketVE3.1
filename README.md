@@ -157,7 +157,7 @@ Para simular a compra de ativos por investidores, é utilizada uma terceira estr
 
 Todos os dados são salvos em arquivos .txt, para isso utilizamos as funções ``saveInvestors()``, ``saveAssets()`` e ``saveAssociations()`` e para recuperação dos dados usamos ``loadInvestors()``, ``loadAssets()`` e ``loadAssociations()``
 
-...
+---
 
 ## 🔗 Repositório
 

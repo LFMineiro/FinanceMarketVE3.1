@@ -49,7 +49,6 @@ void registerAssociation(){
     }
 
     Investor *tempInvestor = searchInvestor(idInvestor);
-    strcpy(nameInvestor, tempInvestor->name);
 
     // Validação do Periodo da Compra
 	while(isPeriodValid){
@@ -64,18 +63,22 @@ void registerAssociation(){
 
     int id = 1;
     if(associationsList) id = associationsList[numAssociations - 1]->id + 1;
-	createAssociation(id, nameInvestor, nameAsset, period);
+	createAssociation(id, tempInvestor->name, tempInvestor->profile, tempAtivo->ticker, tempAtivo->type, tempAtivo->risk, tempAtivo->price, period);
 
     printf("Associacao criada!\n");
-
 }
 
-Association* createAssociation(int id,const char* nameInvestor, const char* nameAsset, const char* period){
+Association* createAssociation(int id,const char* nameInvestor, const char* profileInvestor, const char* nameAsset, const char* type, const char risk, float price, char* period){
     Association *association = (Association *) calloc(1, sizeof(Association));
     
     association->id = id;
     strcpy(association->nameInvestor, nameInvestor);
+    strcpy(association->profile, profileInvestor);
+
     strcpy(association->nameAsset, nameAsset);
+    strcpy(association->type, type);
+    association->risk = risk;
+    association->price = price;
     strcpy(association->period, period);
 
     //adiciona à lista
@@ -86,13 +89,10 @@ Association* createAssociation(int id,const char* nameInvestor, const char* name
 }
 
 void deleteAssociation(int id){
-    for (int i = 0; i < numAssociations; i++)
-    {
-        if(associationsList[i]->id == id){
-            
+    for (int i = 0; i < numAssociations; i++){
+        if(associationsList[i]->id == id){ 
             free(associationsList[i]);
-            for (int j = i; j < numAssociations - 1; j++)
-            {
+            for (int j = i; j < numAssociations - 1; j++){
                 associationsList[j] = associationsList[j+1];
             }
 
@@ -114,12 +114,17 @@ void loadAssociations(){
     
     int tempId;
     char tempNameInvestor[35];
+    char profile[35];
     char tempNameAsset[15];
+    char type[15];
+    float price;
+    char risk;
     char tempPeriod[7];
 
-    while (fscanf(associationsFile, "%d;%[^;];%[^;];%[^;];", &tempId, tempNameInvestor, tempNameAsset, tempPeriod) == 4){
+    while (fscanf(associationsFile, "%d;%[^;];%[^;];%[^;];%[^;];%c;%f;%[^;];",&
+        tempId, tempNameInvestor, profile, tempNameAsset, type, &risk, &price, tempPeriod) == 8){
 
-        createAssociation(tempId, tempNameInvestor, tempNameAsset, tempPeriod);
+        createAssociation(tempId, tempNameInvestor, profile, tempNameAsset, type, risk, price, tempPeriod);
     }
 
     fclose(associationsFile);
@@ -133,7 +138,9 @@ void saveAssociations(){
     
     for (int i = 0; i < numAssociations; i++){   
         Association *association = associationsList[i];
-        fprintf(associationsFile,"%d;%s;%s;%s;\n", association->id, association->nameInvestor, association->nameAsset, association->period);
+        fprintf(associationsFile,"%d;%s;%s;%s;%s;%c;%f;%s;\n", association->id,
+             association->nameInvestor, association->profile, association->nameAsset,
+             association->type, association->risk, association->price, association->period);
     }
 
     fclose(associationsFile);
@@ -162,7 +169,7 @@ void getAssetsByInvestorAndPeriod() {
     }
 
 	while(isPeriodValid){
-        printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
+        printf("\nEm qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
 	    scanf("%s", period);
 
         if(period[4] == '.' && (period[5] == '1' || period[5] == '2')) 
@@ -187,7 +194,13 @@ void getAssetsByInvestorAndPeriod() {
 
 		if(strcmp(associationsList[i]->nameInvestor, nameInvestor) == 0 && strcmp(associationsList[i]->period, period) == 0) {
             numAux++;
-            printf("Ativo[%d] = %s\n", numAux, associationsList[i]->nameAsset);
+
+            printf("\n%-10s | %-15s | %-5s | %-10s\n", 
+                "Ticker", "Tipo", "Risco", "Preco");
+            printf("--------------------------------------------------------------\n");
+
+            printf("%-10.8s | %-15.12s | %-5c | %8.2f\n", 
+                associationsList[i]->nameAsset, associationsList[i]->type, associationsList[i]->risk, associationsList[i]->price);
 		}
         
 	}
@@ -221,7 +234,7 @@ void getInvestorsByAssetAndPeriod() {
     }
 	
 	while(isPeriodValid){
-        printf("Em qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
+        printf("\nEm qual periodo foi comprado (2025.1, 2025.2, 2024.1): ");
 	    scanf("%s", period);
 
         if(period[4] == '.' && (period[5] == '1' || period[5] == '2')) 
@@ -230,24 +243,24 @@ void getInvestorsByAssetAndPeriod() {
             printf("\n========== Digite um periodo valido ========== \n");
     }
 	
-    //obtem o nome do investidor que foi passado pelo codigo
-
+    //obtem o nome do ativo que foi passado pelo codigo
 	Asset *tempAsset = searchAsset(id);
 	strcpy(nameAsset, tempAsset->ticker);
     
-	
     printf("\n=========== INVESTIDORES DO ATIVO ===========\n");
     printf("Ativo: %s\nPeriodo: %s\n", nameAsset, period);
     printf("-------------------------------------------\n");
 
 	for(int i = 0; i < numAssociations; i++) {  
-
         /*  Percorre a lista e filtra pelo nome do investidor   
             e por periodo, que foram passados pelo usuario */
 
 		if(strcmp(associationsList[i]->nameAsset, nameAsset) == 0 && strcmp(associationsList[i]->period, period) == 0) {
             numAux++;                
-            printf("Investidor[%d] = %s\n", numAux, associationsList[i]->nameInvestor);
+            printf("+-----------------------------------------+\n");
+            printf("| Nome   : %-30.30s |\n", associationsList[i]->nameInvestor);
+            printf("| Perfil : %-30.30s |\n", associationsList[i]->profile);
+            printf("+-----------------------------------------+\n\n");
         }
                 
     }

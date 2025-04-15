@@ -1,0 +1,37 @@
+**Sistema de Gerenciamento de Investimentos no Mercado Financeiro**
+
+Você foi designado para desenvolver um sistema de gerenciamento de investimentos no mercado financeiro.
+
+**Entidades do Sistema:**
+
+1. **Investidor**
+    - **Código:** 5 dígitos.
+    - **Nome**
+    - CPF
+    - **Perfil de Investidor:** (Ex.: Conservador, Moderado, Agressivo)
+2. **Ativo**
+    - **Código:** 4 dígitos.
+    - **Tipo:** (Ex.: ação, título, fundo de investimento).
+    - Nome
+    - **Valor Unitário**
+    - **Risco**
+
+**Requisitos do Sistema:**
+
+- O sistema deve ser capaz de armazenar uma lista de Investidores e uma lista de Ativos.
+- Todas as estruturas devem ser alocadas dinamicamente.
+- Deve ser implementado um menu de opções que permita:
+    - Inserção e remoção de Investidores.
+    - Inserção e remoção de ativos.
+- O sistema deve permitir consultas, tais como:
+    - **Consulta 1:** Exibir todas os ativos da carteira de um determinado Investidor por período
+    - **Consulta 2:** Exibir os Investidores que possuem determinado ativo em determinado período
+- Deve ser implementada a funcionalidade de salvamento e recuperação dos dados entre sessões, garantindo que as informações não sejam perdidas ao encerrar o programa.
+
+**Entrega:**
+
+- O projeto deve ser entregue juntamente com o código-fonte.
+- Certifique-se de incluir, no mínimo, 3 registros de Investidores, 3 de Ativos e suas respectivas alocações.
+
+#Comando
+gcc src/financeMarket.c src/investor.c src/asset.c src/menu.c src/association.c -o FinanceMarketVE

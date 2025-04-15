@@ -1,4 +1,3 @@
-1;alissu;conservador;
-3;kaus;Moderado;
-4;castr;Moderado;
-5;teste;Agressivo;
+1;Mineiro;Agressivo;
+3;Nivaldo;Moderado;
+4;Santana;Conservador;

@@ -1,2 +1,3 @@
-1;kaus;rer;2022.1;
-2;teste;rer;2034.2;
+1;Mineiro;Agressivo;PETR4;Acao;L;25.120001;2025.1;
+2;Mineiro;Agressivo;BTC;Cripto;H;500000.000000;2013.2;
+3;Santana;Conservador;PETR4;Acao;L;25.120001;2025.1;
